@@ -40,6 +40,12 @@ class AssistantSalesManegerController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required | string',
+            'email' => 'required | unique:users,email',
+            'mobile' => 'required | unique:users,mobile',
+        ]);
+        
         $lastAssistantSalesManeger = AssistantSalesManeger::orderBy('id', 'desc')->first();
         if ($lastAssistantSalesManeger) {
             $code = 'ASM' . $lastAssistantSalesManeger->id + 1;
@@ -50,7 +56,9 @@ class AssistantSalesManegerController extends Controller
         $assistantSalesManeger->name = $request->name;
         if ($request->director_id) {
             $assistantSalesManeger->director_id = $request->director_id;
-        } elseif (Str::startsWith(auth()->user()->code, 'JD')) {
+        } elseif(Str::startsWith(auth()->user()->code, 'D')){
+            $assistantSalesManeger->director_id = Director::where('code', auth()->user()->code)->first()->id;
+        }elseif (Str::startsWith(auth()->user()->code, 'JD')) {
             $assistantSalesManeger->director_id = JointDirector::where('code', auth()->user()->code)->first()->director_id;
         } elseif (Str::startsWith(auth()->user()->code, 'SM')) {
             $assistantSalesManeger->director_id = SeniorManeger::where('code', auth()->user()->code)->first()->director_id;
@@ -59,7 +67,7 @@ class AssistantSalesManegerController extends Controller
         if ($request->joint_director_id) {
             $assistantSalesManeger->joint_director_id = $request->joint_director_id;
         } elseif (Str::startsWith(auth()->user()->code, 'JD')) {
-            $assistantSalesManeger->joint_director_id = JointDirector::where('code', auth()->user()->code)->first()->joint_director_id;
+            $assistantSalesManeger->joint_director_id = JointDirector::where('code', auth()->user()->code)->first()->id;
         } elseif (Str::startsWith(auth()->user()->code, 'SM')) {
             $assistantSalesManeger->joint_director_id = SeniorManeger::where('code', auth()->user()->code)->first()->joint_director_id;
         }
@@ -79,6 +87,10 @@ class AssistantSalesManegerController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'email' => 'required | unique:users,email',
+        ]);
+        
         $assistantSalesManeger = AssistantSalesManeger::find($id);
         $assistantSalesManeger->name              = $request->name;
         $assistantSalesManeger->director_id       = $request->director_id;

@@ -16,6 +16,12 @@ class DirectorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required | string',
+            'email' => 'required | unique:users,email',
+            'mobile' => 'required | unique:users,mobile',
+        ]);
+        
         $lastDirector = Director::orderBy('id', 'desc')->first();
         if($lastDirector)
         {
@@ -37,6 +43,9 @@ class DirectorController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'email' => 'required | unique:users,email',
+        ]);
         $director = Director::find($id);
         $director->name   = $request->name;
         $director->email  = $request->email;

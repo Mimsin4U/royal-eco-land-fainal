@@ -32,6 +32,12 @@ class SeniorManegerController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required | string',
+            'email' => 'required | unique:users,email',
+            'mobile' => 'required | unique:users,mobile',
+        ]);
+        
         $lastSeniorManeger = SeniorManeger::orderBy('id', 'desc')->first();
         if ($lastSeniorManeger) {
             $code = 'SM' . $lastSeniorManeger->id + 1;
@@ -67,7 +73,9 @@ class SeniorManegerController extends Controller
 
     public function update(Request $request,$id)
     {
-        
+        $request->validate([
+            'email' => 'required | unique:users,email',
+        ]);
         $seniorManeger = SeniorManeger::find($id);
         $seniorManeger->name = $request->name;
         $seniorManeger->director_id = $request->director_id;

@@ -56,13 +56,13 @@
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Values</label>
                             <div class="col-9">
-                                <textarea name="values" id="vission" class="form-control" >{{$company->values}}</textarea>
+                                <textarea name="value" id="vission" class="form-control" >{{$company->value}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Services</label>
                             <div class="col-9">
-                                <textarea name="services" id="vission" class="form-control" >{{$company->services}}</textarea>
+                                <textarea name="service" id="vission" class="form-control" >{{$company->service}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">

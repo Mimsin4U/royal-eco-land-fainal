@@ -8,7 +8,7 @@
     <thead>
         <tr>
             <th>SL NO</th>
-            <th>Plot_Order_ID</th>
+            <th>Order_ID</th>
             <th>Deal By</th>
             <th>Recived By</th>
             <th>For</th>

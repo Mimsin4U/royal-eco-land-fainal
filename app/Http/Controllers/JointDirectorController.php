@@ -24,6 +24,12 @@ class JointDirectorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required | string',
+            'email' => 'required | unique:users,email',
+            'mobile' => 'required | unique:users,mobile',
+        ]);
+        
         $lastJointDirector = JointDirector::orderBy('id', 'desc')->first();
         if ($lastJointDirector) {
             $code = 'JD' . $lastJointDirector->id + 1;
@@ -48,6 +54,10 @@ class JointDirectorController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'email' => 'required | unique:users,email',
+        ]);
+        
         $jointDirector = JointDirector::find($id);
         $jointDirector->name = $request->name;
         $jointDirector->director_id = $request->director_id;

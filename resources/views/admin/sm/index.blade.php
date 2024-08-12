@@ -90,7 +90,7 @@
                                 @if (Str::startsWith( auth()->user()->code,'D'))
                                     <h5>{{auth()->user()->name}}</h5>
                                 @elseif (Str::startsWith( auth()->user()->code,'JD'))
-                                    <h5>{{$directors[0]->name}}</h5>
+                                    <h5>{{$directors[0]->name ?? null}}</h5>
                                 @else
                                     <select name="director_id" class="form-select" id="director" required>
                                         <option value="">Select Director</option>
