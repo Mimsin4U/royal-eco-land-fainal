@@ -14,7 +14,7 @@
                     <li><a href="{{$company->fb_link}}"><i class="fab fa-facebook-f"></i></a></li>
                     <li><a href="{{$company->youtube_link}}"><i class="fab fa-youtube"></i></a></li>
                     <li><a href="{{$company->linkedin_link}}"><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href="{{$company->whatsapp}}"><i class="fab fa-whatsapp"></i></a></li>
+                    <li><a href="https://wa.me/{{$company->whatsapp}}"><i class="fab fa-whatsapp"></i></a></li>
                 </ul>
                 <div class="sign-box">
                     @if(Auth::guard('client')->check())

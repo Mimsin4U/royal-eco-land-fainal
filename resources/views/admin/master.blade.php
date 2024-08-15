@@ -11,6 +11,9 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('/') }}admin/assets/images/favicon.ico">
 
+    <!-- Summernote css -->
+    <link rel="stylesheet" href="{{ asset('/') }}admin/assets/summernote/summernote-lite.min.css">
+
     <!-- Daterangepicker css -->
     <link rel="stylesheet" href="{{ asset('/') }}admin/assets/vendor/daterangepicker/daterangepicker.css">
 
@@ -1271,6 +1274,8 @@
     <!-- SimpleMDE demo -->
     <script src="{{ asset('/') }}admin/assets/js/pages/demo.simplemde.js"></script>
     <script src="{{ asset('/') }}admin/assets/vendor/select2/js/select2.min.js"></script>
+    {{-- Summernote Js  --}}
+    <script src="{{ asset('/') }}admin/assets/summernote/summernote-lite.min.s"></script>
     @yield('script')
 </body>
 

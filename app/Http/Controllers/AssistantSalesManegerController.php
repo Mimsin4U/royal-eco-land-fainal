@@ -19,7 +19,7 @@ class AssistantSalesManegerController extends Controller
         if (Str::startsWith(auth()->user()->code, 'D')) {
             $jointDirectors = JointDirector::where(['director_id' => Director::where('code', auth()->user()->code)->first('id')->id, 'status' => 1])->get();
             $seniorManegers = SeniorManeger::where(['director_id' => Director::where('code', auth()->user()->code)->first('id')->id, 'status' => 1])->get();
-            $assistantSalesManegers = AssistantSalesManeger::where(['director_id' => Director::where('code', auth()->user()->code)->first('id')->id])->get();;
+            $assistantSalesManegers = AssistantSalesManeger::where(['director_id' => Director::where('code', auth()->user()->code)->first('id')->id, 'status' => 1])->get();
         } elseif (Str::startsWith(auth()->user()->code, 'JD')) {
             $directors      = Director::where(['id' => JointDirector::where('code', auth()->user()->code)->first()->director_id])->select('name')->get();
             $jointDirectors = JointDirector::where(['code' => auth()->user()->code, 'status' => 1])->get('name');
@@ -33,7 +33,7 @@ class AssistantSalesManegerController extends Controller
         } else {
             $jointDirectors = JointDirector::where('status', 1)->get();
             $seniorManegers = SeniorManeger::where('status', 1)->get();
-            $assistantSalesManegers = AssistantSalesManeger::all();
+            $assistantSalesManegers = AssistantSalesManeger::where('status', 1)->get();
         }
         return view('admin.asm.index', compact('directors', 'jointDirectors', 'seniorManegers', 'assistantSalesManegers',));
     }
@@ -82,7 +82,7 @@ class AssistantSalesManegerController extends Controller
         $assistantSalesManeger->mobile = $request->mobile;
         $assistantSalesManeger->image  = "dummy/profile/dummy_person.jpg";
         $assistantSalesManeger->save();
-        return redirect(route('assistantSalesManeger.manage'))->with('message', 'Asistent Senior Maneger Created Successfully');
+        return redirect(route('assistantSalesManeger.manage'))->with('message', 'Asistent Sales Maneger Created Successfully');
     }
 
     public function update(Request $request, $id)
@@ -101,12 +101,12 @@ class AssistantSalesManegerController extends Controller
         $assistantSalesManeger->status            = $request->status;
         $assistantSalesManeger->image             = "dummy/profile/dummy_person.jpg";
         $assistantSalesManeger->save();
-        return redirect(route('assistantSalesManeger.manage'))->with('message', 'Asistent Senior Maneger Updated Successfully');
+        return redirect(route('assistantSalesManeger.manage'))->with('message', 'Asistent Sales Maneger Updated Successfully');
     }
 
     public function delete(Request $request)
     {
         AssistantSalesManeger::find($request->id)->delete();
-        return redirect(route('assistantSalesManeger.manage'))->with('message', 'Asistent Senior Maneger Deleted Successfully');
+        return redirect(route('assistantSalesManeger.manage'))->with('message', 'Asistent Sales Maneger Deleted Successfully');
     }
 }

@@ -92,7 +92,7 @@ class PlotOrderController extends Controller
         if($vr) {
             $vr->delete();
         }
-        // Commission 
+
         $this->giveBookingMoneyCommission($plotOrder->id,1, $request->booking_money);
         
         return to_route('plotOrders')->with('message', "Plot Order Placed Successfully And New Client  ( $client->name ) Added, Password is: 12345678 ");
@@ -131,7 +131,7 @@ class PlotOrderController extends Controller
         $plotOrder->due_amount = $plotOrder->total_price_extended - $plotOrder->paid_amount;
         $plotOrder->amount_per_installment = round($plotOrder->due_amount /  $installments);
         $plotOrder->save();
-        // Commissions 
+        
         $this->giveDownPaymentCommission($plotOrder,2, $request->down_payment);
         
         return to_route('plotOrders')->with('message', 'Down Payment Recived Successfully!');
@@ -211,15 +211,14 @@ class PlotOrderController extends Controller
     private function giveBookingMoneyCommission($plotOrderId, int $cType,$amount)
     {
         $plotOrder = PlotOrder::find($plotOrderId);
-        $tax = $amount - (($amount*100)%15);
         if (Str::startsWith($plotOrder->confirmed_by, 'D')) {
-            $commission = new Commission();
-            $commission->plot_order_id = $plotOrder->id;
-            $commission->employee_code = Director::where('code', $plotOrder->confirmed_by)->first()->code;
-            $commission->payment_date = now();
-            $commission->type = $cType;
-            $commission->amount = round(($plotOrder->booking_money * 45) / 100);
-            $commission->save();
+            $d = Director::where('code', $plotOrder->confirmed_by)->first();
+            if ($d) {
+                $commissionRates = [
+                    $d->code => 45,
+                ];
+                $this->giveCommission($commissionRates, $cType, $plotOrder, $amount);
+            }
         } elseif (Str::startsWith($plotOrder->confirmed_by, 'JD')) {
             $jd = JointDirector::where('code', $plotOrder->confirmed_by)->first();
             if ($jd) {
@@ -262,13 +261,13 @@ class PlotOrderController extends Controller
         $plotOrder = PlotOrder::find($plotOrderId->id);
 
         if (Str::startsWith($plotOrder->confirmed_by, 'D')) {
-            $commission = new Commission();
-            $commission->plot_order_id = $plotOrder->id;
-            $commission->employee_code = Director::where('code', $plotOrder->confirmed_by)->first()->code;
-            $commission->payment_date = now();
-            $commission->type = $cType;
-            $commission->amount = round(($amount * 20) / 100);
-            $commission->save();
+            $d = Director::where('code', $plotOrder->confirmed_by)->first();
+            if ($d) {
+                $commissionRates = [
+                    $d->code => 20,
+                ];
+                $this->giveCommission($commissionRates, $cType, $plotOrder, $amount);
+            }
         } elseif (Str::startsWith($plotOrder->confirmed_by, 'JD')) {
             $jd = JointDirector::where('code', $plotOrder->confirmed_by)->first();
             if ($jd) {
@@ -311,14 +310,13 @@ class PlotOrderController extends Controller
         $plotOrder = PlotOrder::find($plotOrderId);
 
         if (Str::startsWith($plotOrder->confirmed_by, 'D')) {
-            $commission = new Commission();
-            $commission->plot_order_id = $plotOrder->id;
-            $commission->employee_code = Director::where('code', $plotOrder->confirmed_by)->first()->code;
-            $commission->payment_date = now();
-            $commission->type = $cType;
-            $commission->amount = round(($installmentAmoutnt * 15) / 100);
-            $commission->installment_no = $plotOrder->installments->last()->installment_no;
-            $commission->save();
+            $d = Director::where('code', $plotOrder->confirmed_by)->first();
+            if ($d) {
+                $commissionRates = [
+                    $d->code => 15,
+                ];
+                $this->giveCommission($commissionRates, $cType, $plotOrder, $installmentAmoutnt);
+            }
         } elseif (Str::startsWith($plotOrder->confirmed_by, 'JD')) {
             $jd = JointDirector::where('code', $plotOrder->confirmed_by)->first();
             if ($jd) {
@@ -355,10 +353,9 @@ class PlotOrderController extends Controller
         }
     }
 
-    // For Giveing Commission to a jd,sm,asm --------->
+    // For Giveing Commission to a d,jd,sm,asm --------->
     private function giveCommission($commissionRates,$cType,$plotOrder,$amount) 
     {
-        
         foreach ($commissionRates as $employeeCode => $percentage) {
             if ($employeeCode) {
                 $commission = new Commission();

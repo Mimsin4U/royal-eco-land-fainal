@@ -32,6 +32,7 @@
                         <div class="row mb-3">
                             <label for="mission" class="col-3 col-form-label">Mission</label>
                             <div class="col-9">
+                                <textarea class="form-control summernote" name="mission" placeholder="Company Mission"></textarea>
                                 <textarea name="mission" id="mission" class="form-control"  >{{$company->mission}}</textarea>
                             </div>
                         </div> 
