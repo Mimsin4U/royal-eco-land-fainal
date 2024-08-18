@@ -57,8 +57,8 @@
                         <div class="widget-title">
                             <h3>About</h3>
                         </div>
-                        <div class="text ">
-                            <p class="text-justify">{!! $company->overview !!}</p>
+                        <div class="s-text">
+                            {!! $company->overview !!}
                         </div>
                     </div>
                 </div>

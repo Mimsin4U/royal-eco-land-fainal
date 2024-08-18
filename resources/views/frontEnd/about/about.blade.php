@@ -1,7 +1,7 @@
 @extends('frontEnd.master')
 @section('content')
 <!--Page Title-->
-<section class="page-title-two bg-color-1 centred p-0 m-0">
+{{-- <section class="page-title-two bg-color-1 centred p-0 m-0">
     <div class="pattern-layer">
         <div class="pattern-1" style="background-image: url({{ asset('frontEndAsset') }}/assets/images/shape/shape-9.png);"></div>
         <div class="pattern-2" style="background-image: url({{ asset('frontEndAsset') }}/assets/images/shape/shape-10.png);"></div>
@@ -15,7 +15,7 @@
             </ul>
         </div>
     </div>
-</section>
+</section> --}}
 <!--End Page Title-->
 
     <!-- about-section -->
@@ -41,8 +41,8 @@
                                     <h5>About</h5>
                                     <h2>From Royal Eco Vally </h2>
                                 </div>
-                                <div class="text">
-                                    <p>{{$company->overview}}</p>
+                                <div class="s-text">
+                                    <p>{!!$company->overview!!}</p>
                                 </div>
                                 <div class="btn-box">
                                     <a href="{{route('contact')}}" class="theme-btn btn-one">Contact</a>
@@ -55,7 +55,6 @@
         </div>
     </section>
     <!-- about-section end -->
-
     <!-- about-section -->
     <section class="about-section about-page p-0">
         <div class="container p-0"  >
@@ -64,10 +63,10 @@
                     <div class="row align-items-center clearfix">
                         <div class="discription-box content-widget" style="background: #fdfdfd">
                             <div class="title-box">
-                                <h4>Our Mission</h4>
+                                <h4>Our Mission </h4>
                             </div>
-                            <div class="text">
-                                <p>{{$company->mission}}</p>
+                            <div class="s-text">
+                                {!!$company->mission!!}
                             </div>
                         </div>
                     </div>
@@ -79,7 +78,7 @@
                                 <h4>Our Vision</h4>
                             </div>
                             <div class="text">
-                                <p>{{$company->vission}}</p>
+                                {!!$company->vission!!}
                             </div>
                         </div>
                     </div>
@@ -90,8 +89,8 @@
                             <div class="title-box">
                                 <h4>Our Values</h4>
                             </div>
-                            <div class="text">
-                                <p>{{$company->value}}</p>
+                            <div class="s-text">
+                                {!!$company->value!!}
                             </div>
                         </div>
                     </div>
@@ -102,8 +101,8 @@
                             <div class="title-box">
                                 <h4>Our Services</h4>
                             </div>
-                            <div class="text">
-                                <p>{{$company->service}}</p>
+                            <div class="s-text">
+                                {!!$company->service!!}
                             </div>
                         </div>
                     </div>
@@ -114,8 +113,8 @@
                             <div class="title-box">
                                 <h4>Why Choose Us?</h4>
                             </div>
-                            <div class="text">
-                                <p>{{$company->whyus}}</p>
+                            <div class="s-text">
+                                {!!$company->whyus!!}
                             </div>
                         </div>
                     </div>
@@ -126,8 +125,8 @@
                             <div class="title-box">
                                 <h4>Company Policy</h4>
                             </div>
-                            <div class="text">
-                                <p>{{$company->policy}}</p>
+                            <div class="s-text">
+                                {!!$company->policy!!}
                             </div>
                         </div>
                     </div>
@@ -138,8 +137,8 @@
                             <div class="title-box">
                                 <h4>Company Terms</h4>
                             </div>
-                            <div class="text">
-                                <p>{{$company->term}}</p>
+                            <div class="s-text">
+                                {!!$company->term!!}
                             </div>
                         </div>
                     </div>

@@ -28,48 +28,53 @@
                             <div class="col-9">
                                 <input type="text" name="slogan" required class="form-control"  id="slogan" value="{{$company->slogan}}" placeholder="Enter Your Project Slogan"/>
                             </div>
-                        </div>  
+                        </div>
+                        <div class="row mb-3">
+                            <label for="simplemde1" class="col-3 col-form-label">Overview</label>
+                            <div class="col-9">
+                                <textarea name="overview" class="form-control summernote">{{$company->overview}}</textarea>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label for="mission" class="col-3 col-form-label">Mission</label>
                             <div class="col-9">
-                                <textarea class="form-control summernote" name="mission" placeholder="Company Mission"></textarea>
-                                <textarea name="mission" id="mission" class="form-control"  >{{$company->mission}}</textarea>
+                                <textarea name="mission" class="form-control summernote">{!!$company->mission!!}</textarea>
                             </div>
                         </div> 
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Vission</label>
                             <div class="col-9">
-                                <textarea name="vission" id="vission" class="form-control"  >{{$company->vission}}</textarea>
+                                <textarea name="vission" class="form-control summernote">{!!$company->vission!!}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Policy</label>
                             <div class="col-9">
-                                <textarea name="policy" id="vission" class="form-control" >{{$company->policy}}</textarea>
+                                <textarea name="policy" class="form-control summernote" >{!!$company->policy!!}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Term</label>
                             <div class="col-9">
-                                <textarea name="term" id="vission" class="form-control" >{{$company->term}}</textarea>
+                                <textarea name="term"class="form-control summernote" >{{$company->term}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Values</label>
                             <div class="col-9">
-                                <textarea name="value" id="vission" class="form-control" >{{$company->value}}</textarea>
+                                <textarea name="value" class="form-control summernote" >{!!$company->value!!}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Services</label>
                             <div class="col-9">
-                                <textarea name="service" id="vission" class="form-control" >{{$company->service}}</textarea>
+                                <textarea name="service" id="vission" class="form-control summernote" >{{$company->service}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="vission" class="col-3 col-form-label">Why Us</label>
                             <div class="col-9">
-                                <textarea name="whyus" id="vission" class="form-control" >{{$company->whyus}}</textarea>
+                                <textarea name="whyus" id="vission" class="form-control summernote" >{{$company->whyus}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -160,14 +165,6 @@
                             <label for="compTradelicense" class="col-3 col-form-label">Company Trade License NO</label>
                             <div class="col-9">
                                 <input type="file" accept="application/pdf" name="trade_license"  class="form-control" id="compTradelicense" value="{{$company->trade_license}}"/>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="simplemde1" class="col-3 col-form-label">Overview</label>
-                            <div class="col-9">
-                                <div class="tab-pane show active" id="simplemde-preview">
-                                    <textarea id="simplemde1" name="overview" class="form-control"">{{$company->overview}}</textarea>
-                                </div> <!-- end preview-->
                             </div>
                         </div>
                         <div class="row mb-3">

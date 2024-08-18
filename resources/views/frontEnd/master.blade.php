@@ -32,6 +32,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&amp;display=swap" rel="stylesheet">
     <style>
+        .s-text li{
+            list-style: initial !important;
+            margin-left: 10px !important;
+        }
+    </style>
+    <style>
         @yield('style')
     </style>
 </head>
